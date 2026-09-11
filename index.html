@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex & Taylor | We're Getting Married!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #8a7968;
+            --bg: #fdfbf7;
+            --text: #333;
+        }
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            padding: 40px 20px;
+            animation: fadeIn 2s ease-in;
+        }
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        .date {
+            font-size: 1.5rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+        }
+        .details {
+            line-height: 1.8;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+        }
+        /* RSVP Form Styling */
+        .rsvp-section {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin-top: 20px;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: 'Lato', sans-serif;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: var(--primary);
+            color: white;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+            width: 100%;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #6d5f50;
+            transform: translateY(-2px);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <p style="letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem;">Together with their families</p>
+        <h1>Alex & Taylor</h1>
+        <p class="date">Saturday, June 14, 2025</p>
+
+        <div class="details">
+            <p>🌿 The Botanical Gardens<br>123 Flower Lane, Cityville, ST 12345<br>Ceremony at 4:00 PM</p>
+            <p>We can't wait to celebrate our special day with you!</p>
+        </div>
+
+        <div class="rsvp-section">
+            <h2 style="font-family: 'Playfair Display', serif; color: var(--primary);">RSVP</h2>
+            <p style="font-size: 0.9rem; margin-bottom: 20px;">Please respond by May 1st, 2025</p>
+
+            <!-- FORMSUBMIT.CO INTEGRATION -->
+            <!-- Replace 'your.email@example.com' with your actual email address -->
+            <form action="https://formsubmit.co/your.email@example.com" method="POST">
+                <!-- Formsubmit configuration -->
+                <input type="hidden" name="_subject" value="New Wedding RSVP!">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_next" value="https://yourusername.github.io/repo-name/thanks.html"> <!-- Optional: redirect after submit -->
+
+                <input type="text" name="name" placeholder="Your Full Name" required>
+                <input type="email" name="email" placeholder="Your Email Address" required>
+
+                <select name="attendance" required>
+                    <option value="" disabled selected>Will you be attending?</option>
+                    <option value="Joyfully Accepts">Joyfully Accepts</option>
+                    <option value="Regretfully Declines">Regretfully Declines</option>
+                </select>
+
+                <select name="guests" required>
+                    <option value="" disabled selected>Number of Guests</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+
+                <textarea name="dietary" rows="3" placeholder="Any dietary restrictions or song requests?"></textarea>
+
+                <button type="submit">Send RSVP</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
