@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ahmed & Ons | We're Getting Married!</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💍</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -288,6 +289,8 @@
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
                 </select>
 
                 <textarea name="dietary" rows="3" placeholder="Any dietary restrictions or song requests?"></textarea>
@@ -299,9 +302,8 @@
 
     <!-- COUNTDOWN TIMER JAVASCRIPT -->
     <script>
-        // Set the date we're counting down to (December 25, 2026, 4:00 PM)
-        // Note: This uses the visitor's local timezone. For a specific timezone (e.g., CET), use: '2026-12-25T16:00:00+01:00'
-        const weddingDate = new Date('December 25, 2026 16:00:00').getTime();
+        // Set the date we're counting down to (December 25, 2026, 4:00 PM Tunisia time, UTC+1, no DST)
+        const weddingDate = new Date('2026-12-25T16:00:00+01:00').getTime();
 
         const timer = setInterval(function() {
             const now = new Date().getTime();
