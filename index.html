@@ -77,9 +77,37 @@
 
         .details {
             line-height: 1.8;
-            margin-bottom: 40px;
+            margin-bottom: 25px;
             font-size: 1.1rem;
         }
+
+        /* --- ACTION LINKS: CALENDAR + MAP --- */
+        .action-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        .action-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 22px;
+            border: 1px solid var(--primary);
+            border-radius: 6px;
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-family: 'Lato', sans-serif;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .action-link:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        /* ------------------------------------- */
+
         /* RSVP Form Styling */
         .rsvp-section {
             background: white;
@@ -128,6 +156,7 @@
             .time-box { min-width: 60px; padding: 12px 15px; }
             .time-box .number { font-size: 1.8rem; }
             h1 { font-size: 2.8rem; }
+            .action-link { padding: 12px 16px; font-size: 0.9rem; }
         }
     </style>
 </head>
@@ -162,6 +191,18 @@
         <div class="details">
             <p>🌿 <strong>La Marquise Wedding Hall</strong><br>Ceremony at 4:00 PM</p>
             <p>We can't wait to celebrate our special day with you!</p>
+        </div>
+
+        <!-- ACTION LINKS: ADD TO CALENDAR + GET DIRECTIONS -->
+        <!-- NOTE: The calendar link uses UTC time based on Tunisia (UTC+1, no DST). -->
+        <!-- Check the time is correct for your venue's real time zone before you send this page. -->
+        <div class="action-links">
+            <a class="action-link" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Ahmed%20%26%20Ons%20Wedding&dates=20261225T150000Z/20261225T170000Z&details=Join%20us%20to%20celebrate%20the%20wedding%20of%20Ahmed%20and%20Ons.&location=La%20Marquise%20Wedding%20Hall" target="_blank" rel="noopener">
+                📅 Add to calendar
+            </a>
+            <a class="action-link" href="https://maps.app.goo.gl/n9TfSi2zWK447Dx76" target="_blank" rel="noopener">
+                📍 Get directions
+            </a>
         </div>
 
         <div class="rsvp-section">
