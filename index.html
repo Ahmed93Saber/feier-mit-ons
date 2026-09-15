@@ -10,6 +10,8 @@
             --primary: #8a7968;
             --bg: #fdfbf7;
             --text: #333;
+            --tunisia: #2c6fbb; /* Tunisian blue (Sidi Bou Said) */
+            --egypt: #c9a227;   /* Egyptian gold */
         }
         body {
             font-family: 'Lato', sans-serif;
@@ -22,10 +24,38 @@
             align-items: center;
             text-align: center;
         }
+
+        /* --- BACKGROUND PATTERN (shared Tunisian + Egyptian geometric art) --- */
+        /* Two overlapping squares make an 8-point star. */
+        /* Blue = Tunisia, gold = Egypt. The two sides join in one shape. */
+        .bg-pattern {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            opacity: 0.12;
+            pointer-events: none;
+        }
+        .bg-pattern svg {
+            width: 100%;
+            height: 100%;
+        }
+        /* --------------------------------------------------------------- */
+
         .container {
             max-width: 600px;
             padding: 40px 20px;
             animation: fadeIn 2s ease-in;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Small two-tone line that joins the two families. */
+        .union-divider {
+            width: 120px;
+            height: 2px;
+            margin: 18px auto 6px;
+            border: none;
+            background: linear-gradient(90deg, var(--tunisia), var(--egypt));
         }
         h1 {
             font-family: 'Playfair Display', serif;
@@ -162,10 +192,34 @@
 </head>
 <body>
 
+    <!-- BACKGROUND PATTERN: repeated 8-point star (Tunisian + Egyptian heritage) -->
+    <div class="bg-pattern" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <pattern id="stars" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+                    <!-- Center star: blue square + gold square, rotated 45 deg -->
+                    <rect x="13" y="13" width="34" height="34" fill="none" stroke="#2c6fbb" stroke-width="2"/>
+                    <rect x="13" y="13" width="34" height="34" fill="none" stroke="#c9a227" stroke-width="2" transform="rotate(45 30 30)"/>
+                    <!-- Corner stars so the pattern repeats without seams -->
+                    <rect x="-17" y="-17" width="34" height="34" fill="none" stroke="#2c6fbb" stroke-width="2"/>
+                    <rect x="-17" y="-17" width="34" height="34" fill="none" stroke="#c9a227" stroke-width="2" transform="rotate(45 0 0)"/>
+                    <rect x="43" y="-17" width="34" height="34" fill="none" stroke="#2c6fbb" stroke-width="2"/>
+                    <rect x="43" y="-17" width="34" height="34" fill="none" stroke="#c9a227" stroke-width="2" transform="rotate(45 60 0)"/>
+                    <rect x="-17" y="43" width="34" height="34" fill="none" stroke="#2c6fbb" stroke-width="2"/>
+                    <rect x="-17" y="43" width="34" height="34" fill="none" stroke="#c9a227" stroke-width="2" transform="rotate(45 0 60)"/>
+                    <rect x="43" y="43" width="34" height="34" fill="none" stroke="#2c6fbb" stroke-width="2"/>
+                    <rect x="43" y="43" width="34" height="34" fill="none" stroke="#c9a227" stroke-width="2" transform="rotate(45 60 60)"/>
+                </pattern>
+            </defs>
+            <rect x="0" y="0" width="100%" height="100%" fill="url(#stars)"/>
+        </svg>
+    </div>
+
     <div class="container">
         <p style="letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem; color: #666;">Together with their families</p>
         <p style="font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.3rem; color: var(--primary); margin: 15px 0;">Invite you to celebrate their union</p>
         <h1>Ahmed & Ons</h1>
+        <hr class="union-divider">
         <p class="date">Friday, December 25, 2026</p>
 
         <!-- COUNTDOWN TIMER -->
@@ -200,7 +254,7 @@
             <a class="action-link" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Ahmed%20%26%20Ons%20Wedding&dates=20261225T150000Z/20261225T170000Z&details=Join%20us%20to%20celebrate%20the%20wedding%20of%20Ahmed%20and%20Ons.&location=La%20Marquise%20Wedding%20Hall" target="_blank" rel="noopener">
                 📅 Add to calendar
             </a>
-            <a class="action-link" href="https://maps.app.goo.gl/n9TfSi2zWK447Dx76" target="_blank" rel="noopener">
+            <a class="action-link" href="https://www.google.com/maps/search/?api=1&query=La+Marquise+Wedding+Hall" target="_blank" rel="noopener">
                 📍 Get directions
             </a>
         </div>
