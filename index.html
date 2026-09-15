@@ -37,8 +37,44 @@
             font-size: 1.5rem;
             letter-spacing: 3px;
             text-transform: uppercase;
-            margin-bottom: 30px;
+            margin-bottom: 10px;
         }
+
+        /* --- COUNTDOWN TIMER STYLES --- */
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        .time-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            min-width: 70px;
+            border: 1px solid rgba(138, 121, 104, 0.2);
+        }
+        .time-box .number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--primary);
+            font-weight: 700;
+            line-height: 1;
+        }
+        .time-box .label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #888;
+            margin-top: 8px;
+        }
+        /* ------------------------------- */
+
         .details {
             line-height: 1.8;
             margin-bottom: 40px;
@@ -60,6 +96,7 @@
             border-radius: 6px;
             font-family: 'Lato', sans-serif;
             box-sizing: border-box;
+            font-size: 1rem;
         }
         button {
             background-color: var(--primary);
@@ -72,6 +109,9 @@
             transition: transform 0.2s, background 0.2s;
             width: 100%;
             margin-top: 10px;
+            font-family: 'Lato', sans-serif;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
         button:hover {
             background-color: #6d5f50;
@@ -81,31 +121,61 @@
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        /* Mobile responsiveness for timer */
+        @media (max-width: 480px) {
+            .countdown { gap: 10px; }
+            .time-box { min-width: 60px; padding: 12px 15px; }
+            .time-box .number { font-size: 1.8rem; }
+            h1 { font-size: 2.8rem; }
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <p style="letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem;">Together with their families</p>
+        <p style="letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem; color: #666;">Together with their families</p>
         <h1>Ahmed & Ons</h1>
         <p class="date">Friday, December 25, 2026</p>
 
+        <!-- COUNTDOWN TIMER -->
+        <div class="countdown" id="countdown">
+            <div class="time-box">
+                <span class="number" id="days">00</span>
+                <span class="label">Days</span>
+            </div>
+            <div class="time-box">
+                <span class="number" id="hours">00</span>
+                <span class="label">Hours</span>
+            </div>
+            <div class="time-box">
+                <span class="number" id="minutes">00</span>
+                <span class="label">Mins</span>
+            </div>
+            <div class="time-box">
+                <span class="number" id="seconds">00</span>
+                <span class="label">Secs</span>
+            </div>
+        </div>
+
         <div class="details">
-            <p>🌿 La Marquise Wedding Hall<br>Ceremony at 4:00 PM</p>
+            <p>🌿 <strong>La Marquise Wedding Hall</strong><br>Ceremony at 4:00 PM</p>
             <p>We can't wait to celebrate our special day with you!</p>
         </div>
 
         <div class="rsvp-section">
-            <h2 style="font-family: 'Playfair Display', serif; color: var(--primary);">RSVP</h2>
-            <p style="font-size: 0.9rem; margin-bottom: 20px;">Please respond by May 1st, 2025</p>
+            <h2 style="font-family: 'Playfair Display', serif; color: var(--primary); margin-top: 0;">RSVP</h2>
+            <!-- Updated RSVP date to be closer to the 2026 wedding date -->
+            <p style="font-size: 0.9rem; margin-bottom: 20px; color: #666;">Please respond by November 1st, 2026</p>
 
             <!-- FORMSUBMIT.CO INTEGRATION -->
-            <!-- Replace 'your.email@example.com' with your actual email address -->
-            <form action="https://formsubmit.co/your.email@example.com" method="POST">
+            <!-- IMPORTANT: Replace 'your.email@example.com' with your actual email address -->
+            <form action="https://formsubmit.co/ahmed.93.saber@gmail.com" method="POST">
                 <!-- Formsubmit configuration -->
-                <input type="hidden" name="_subject" value="New Wedding RSVP!">
+                <input type="hidden" name="_subject" value="New Wedding RSVP for Ahmed & Ons!">
                 <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_next" value="https://yourusername.github.io/repo-name/thanks.html"> <!-- Optional: redirect after submit -->
+                <!-- Optional: Create a thanks.html file and update the URL below, or just remove the _next line to use Formsubmit's default thank you page -->
+                <input type="hidden" name="_next" value="https://ahmed93saber.github.io/our-wedding-invite/thanks.html">
 
                 <input type="text" name="name" placeholder="Your Full Name" required>
                 <input type="email" name="email" placeholder="Your Email Address" required>
@@ -130,6 +200,36 @@
             </form>
         </div>
     </div>
+
+    <!-- COUNTDOWN TIMER JAVASCRIPT -->
+    <script>
+        // Set the date we're counting down to (December 25, 2026, 4:00 PM)
+        // Note: This uses the visitor's local timezone. For a specific timezone (e.g., CET), use: '2026-12-25T16:00:00+01:00'
+        const weddingDate = new Date('December 25, 2026 16:00:00').getTime();
+
+        const timer = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            // Time calculations
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display the result, adding a leading zero if less than 10
+            document.getElementById('days').innerText = days < 10 ? '0' + days : days;
+            document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
+            document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
+
+            // If the count down is finished
+            if (distance < 0) {
+                clearInterval(timer);
+                document.getElementById('countdown').innerHTML = '<h2 style="color: var(--primary); font-family: \'Playfair Display\', serif; margin-top: 30px;">We are married! 🎉</h2>';
+            }
+        }, 1000);
+    </script>
 
 </body>
 </html>
