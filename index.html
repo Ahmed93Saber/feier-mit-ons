@@ -4,18 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ahmed & Ons | We're Getting Married!</title>
+
+    <!-- Fonts: elegant serif + clean sans + Arabic calligraphy -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --primary: #5c4a3a;
-            --bg: #fdfbf7;
+            --primary: #5c4a3a;      /* deep warm brown for text */
+            --bg: #fdfbf7;           /* warm cream base */
             --text: #2b2622;
-            --tunisia: #2c6fbb;
-            --egypt: #c9a227;
+            --tunisia: #2c6fbb;      /* Sidi Bou Said blue */
+            --egypt: #c9a227;        /* Pharaonic gold */
         }
+
+        /* ============ LAYER 1: COLOR WASH (Tunisia blue -> Egypt gold) ============ */
         body {
             font-family: 'Lato', sans-serif;
-            background-color: var(--bg);
+            background:
+                radial-gradient(1100px 700px at 0% 0%,    rgba(44,111,187,0.10), transparent 60%),
+                radial-gradient(1100px 700px at 100% 100%, rgba(201,162,39,0.12), transparent 60%),
+                var(--bg);
+            background-attachment: fixed;
             color: var(--text);
             margin: 0;
             padding: 0;
@@ -23,46 +33,59 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
-            /* Smooth transition when the gradient changes */
-            background-image: linear-gradient(to bottom, #fdfbf7, #fdfbf7);
-            background-attachment: fixed;
-            transition: background-image 0.8s ease;
         }
 
-        /* --- PARALLAX BACKGROUND PATTERN --- */
+        /* ============ LAYER 2: 8-POINT STAR LATTICE (shared heritage) ============ */
         .bg-pattern {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 120vh; /* Taller so we can parallax */
+            inset: 0;
             z-index: -1;
             opacity: 0.12;
             pointer-events: none;
-            transition: opacity 1s ease;
         }
         .bg-pattern svg {
             width: 100%;
             height: 100%;
         }
 
+        /* ============ LAYER 4: ARABIC CALLIGRAPHY WATERMARK ============ */
+        /* (To remove it: delete this CSS block AND the <div class="calligraphy"> line in the body) */
+        .calligraphy {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Aref Ruqaa', serif;
+            font-size: clamp(120px, 30vw, 340px);
+            color: rgba(92, 74, 58, 0.045);
+            z-index: -1;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        /* ============ LAYER 3: CORNER ORNAMENTS (jasmine + lotus) ============ */
+        .ornament {
+            position: fixed;
+            width: 180px;
+            height: 180px;
+            opacity: 0.28;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .ornament-jasmine { top: 12px; left: 12px; }
+        .ornament-lotus   { bottom: 12px; right: 12px; }
+
+        /* ============ PAGE CONTENT STYLES ============ */
         .container {
             max-width: 600px;
             padding: 40px 20px;
             animation: fadeIn 2s ease-in;
             position: relative;
             z-index: 1;
-            width: 100%;
-            box-sizing: border-box;
         }
 
-        .section {
-            padding: 40px 0;
-            margin: 20px 0;
-            border-radius: 12px;
-            transition: all 0.5s ease;
-        }
-
+        /* Small two-tone line that joins the two families. */
         .union-divider {
             width: 120px;
             height: 2px;
@@ -83,6 +106,7 @@
             margin-bottom: 10px;
         }
 
+        /* --- COUNTDOWN TIMER STYLES --- */
         .countdown {
             display: flex;
             justify-content: center;
@@ -94,8 +118,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
+            background: white;
             padding: 15px 20px;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
@@ -123,6 +146,7 @@
             font-size: 1.1rem;
         }
 
+        /* --- ACTION LINKS: CALENDAR + MAP --- */
         .action-links {
             display: flex;
             justify-content: center;
@@ -142,17 +166,15 @@
             font-size: 0.95rem;
             font-family: 'Lato', sans-serif;
             transition: background-color 0.2s, color 0.2s;
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(8px);
         }
         .action-link:hover {
             background-color: var(--primary);
             color: white;
         }
 
+        /* --- RSVP FORM STYLES --- */
         .rsvp-section {
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(10px);
+            background: white;
             padding: 30px;
             border-radius: 12px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
@@ -192,31 +214,20 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Scroll-triggered background themes */
-        body.theme-warm {
-            background-image: linear-gradient(to bottom, #fdfbf7, #f5efe6);
-        }
-        body.theme-sage {
-            background-image: linear-gradient(to bottom, #f5efe6, #e8ede2);
-        }
-        body.theme-blue {
-            background-image: linear-gradient(to bottom, #e8ede2, #dce8f0);
-        }
-        body.theme-gold {
-            background-image: linear-gradient(to bottom, #dce8f0, #f0e8d0);
-        }
-
+        /* --- MOBILE TWEAKS --- */
         @media (max-width: 480px) {
             .countdown { gap: 10px; }
             .time-box { min-width: 60px; padding: 12px 15px; }
             .time-box .number { font-size: 1.8rem; }
             h1 { font-size: 2.8rem; }
             .action-link { padding: 12px 16px; font-size: 0.9rem; }
+            .ornament { width: 110px; height: 110px; }
         }
     </style>
 </head>
 <body>
 
+    <!-- ============ LAYER 2: STAR PATTERN (blue square + gold square = 8-point star) ============ -->
     <div class="bg-pattern" aria-hidden="true">
         <svg xmlns="http://www.w3.org/2000/svg">
             <defs>
@@ -237,91 +248,125 @@
         </svg>
     </div>
 
+    <!-- ============ LAYER 4: GIANT FAINT ARABIC BLESSING ============ -->
+    <div class="calligraphy" aria-hidden="true">ألف مبروك</div>
+
+    <!-- ============ LAYER 3: JASMINE (Tunisia, top-left) ============ -->
+    <svg class="ornament ornament-jasmine" viewBox="0 0 120 120" fill="none"
+         stroke="#2c6fbb" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <path d="M8 112 C34 92 56 70 74 40"/>
+        <path d="M36 90 C46 84 56 86 62 92 C54 98 42 96 36 90 Z"/>
+        <path d="M54 66 C64 60 74 62 80 68 C72 74 60 72 54 66 Z"/>
+        <g transform="translate(80,32)">
+            <ellipse cx="0" cy="-9" rx="4.5" ry="9"/>
+            <ellipse cx="0" cy="-9" rx="4.5" ry="9" transform="rotate(72)"/>
+            <ellipse cx="0" cy="-9" rx="4.5" ry="9" transform="rotate(144)"/>
+            <ellipse cx="0" cy="-9" rx="4.5" ry="9" transform="rotate(216)"/>
+            <ellipse cx="0" cy="-9" rx="4.5" ry="9" transform="rotate(288)"/>
+            <circle r="3.5"/>
+        </g>
+        <circle cx="98" cy="52" r="5"/>
+        <path d="M74 40 C82 44 90 48 98 52"/>
+    </svg>
+
+    <!-- ============ LAYER 3: LOTUS (Egypt, bottom-right) ============ -->
+    <svg class="ornament ornament-lotus" viewBox="0 0 120 120" fill="none"
+         stroke="#c9a227" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <g transform="translate(60,66)">
+            <path d="M0 -34 C-6 -18 -6 -8 0 4 C6 -8 6 -18 0 -34 Z"/>
+            <path d="M-18 -24 C-14 -10 -8 -2 0 4 C-3 -8 -8 -16 -18 -24 Z"/>
+            <path d="M18 -24 C14 -10 8 -2 0 4 C3 -8 8 -16 18 -24 Z"/>
+            <path d="M-30 -10 C-22 -2 -12 2 0 4 C-8 -4 -18 -8 -30 -10 Z"/>
+            <path d="M30 -10 C22 -2 12 2 0 4 C8 -4 18 -8 30 -10 Z"/>
+            <path d="M-20 10 C-10 14 10 14 20 10"/>
+        </g>
+    </svg>
+
+    <!-- ============ YOUR INVITATION CONTENT ============ -->
     <div class="container">
-        <div class="section" data-theme="theme-warm">
-            <p style="letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem; color: #6a5f52;">Together with their families</p>
-            <p style="font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.3rem; color: var(--primary); margin: 15px 0;">Invite you to celebrate their union</p>
-            <h1>Ahmed & Ons</h1>
-            <hr class="union-divider">
-            <p class="date">Friday, December 25, 2026</p>
+        <p style="letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem; color: #6a5f52;">Together with their families</p>
+        <p style="font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.3rem; color: var(--primary); margin: 15px 0;">Invite you to celebrate their union</p>
+        <h1>Ahmed & Ons</h1>
+        <hr class="union-divider">
+        <p class="date">Friday, December 25, 2026</p>
 
-            <div class="countdown" id="countdown">
-                <div class="time-box">
-                    <span class="number" id="days">00</span>
-                    <span class="label">Days</span>
-                </div>
-                <div class="time-box">
-                    <span class="number" id="hours">00</span>
-                    <span class="label">Hours</span>
-                </div>
-                <div class="time-box">
-                    <span class="number" id="minutes">00</span>
-                    <span class="label">Mins</span>
-                </div>
-                <div class="time-box">
-                    <span class="number" id="seconds">00</span>
-                    <span class="label">Secs</span>
-                </div>
+        <!-- COUNTDOWN TIMER -->
+        <div class="countdown" id="countdown">
+            <div class="time-box">
+                <span class="number" id="days">00</span>
+                <span class="label">Days</span>
+            </div>
+            <div class="time-box">
+                <span class="number" id="hours">00</span>
+                <span class="label">Hours</span>
+            </div>
+            <div class="time-box">
+                <span class="number" id="minutes">00</span>
+                <span class="label">Mins</span>
+            </div>
+            <div class="time-box">
+                <span class="number" id="seconds">00</span>
+                <span class="label">Secs</span>
             </div>
         </div>
 
-        <div class="section" data-theme="theme-sage">
-            <div class="details">
-                <p>🌿 <strong>La Marquise Wedding Hall</strong><br>Ceremony at 4:00 PM</p>
-                <p>We can't wait to celebrate our special day with you!</p>
-            </div>
-
-            <div class="action-links">
-                <a class="action-link" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Ahmed%20%26%20Ons%20Wedding&dates=20261225T150000Z/20261225T170000Z&details=Join%20us%20to%20celebrate%20the%20wedding%20of%20Ahmed%20and%20Ons.&location=La%20Marquise%20Wedding%20Hall" target="_blank" rel="noopener">
-                    📅 Add to calendar
-                </a>
-                <a class="action-link" href="https://maps.app.goo.gl/5DY2CourRi3ffbt67" target="_blank" rel="noopener">
-                    📍 Get directions
-                </a>
-            </div>
+        <div class="details">
+            <p>🌿 <strong>La Marquise Wedding Hall</strong><br>Ceremony at 4:00 PM</p>
+            <p>We can't wait to celebrate our special day with you!</p>
         </div>
 
-        <div class="section" data-theme="theme-blue">
-            <div class="rsvp-section">
-                <h2 style="font-family: 'Playfair Display', serif; color: var(--primary); margin-top: 0;">RSVP</h2>
-                <p style="font-size: 0.9rem; margin-bottom: 20px; color: #666;">Please respond by November 1st, 2026</p>
+        <!-- ACTION LINKS: ADD TO CALENDAR + GET DIRECTIONS -->
+        <div class="action-links">
+            <a class="action-link" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Ahmed%20%26%20Ons%20Wedding&dates=20261225T150000Z/20261225T170000Z&details=Join%20us%20to%20celebrate%20the%20wedding%20of%20Ahmed%20and%20Ons.&location=La%20Marquise%20Wedding%20Hall" target="_blank" rel="noopener">
+                📅 Add to calendar
+            </a>
+            <a class="action-link" href="https://maps.app.goo.gl/5DY2CourRi3ffbt67" target="_blank" rel="noopener">
+                📍 Get directions
+            </a>
+        </div>
 
-                <form action="https://formsubmit.co/ahmed.93.saber@gmail.com" method="POST">
-                    <input type="hidden" name="_subject" value="New Wedding RSVP for Ahmed & Ons!">
-                    <input type="hidden" name="_captcha" value="false">
-                    <input type="hidden" name="_next" value="https://ahmed93saber.github.io/our-wedding-invite/thanks.html">
+        <!-- RSVP FORM -->
+        <div class="rsvp-section">
+            <h2 style="font-family: 'Playfair Display', serif; color: var(--primary); margin-top: 0;">RSVP</h2>
+            <p style="font-size: 0.9rem; margin-bottom: 20px; color: #666;">Please respond by November 1st, 2026</p>
 
-                    <input type="text" name="name" placeholder="Your Name" required>
-                    <input type="email" name="email" placeholder="Your Email Address" required>
+            <form action="https://formsubmit.co/ahmed.93.saber@gmail.com" method="POST">
+                <input type="hidden" name="_subject" value="New Wedding RSVP for Ahmed & Ons!">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_next" value="https://ahmed93saber.github.io/our-wedding-invite/thanks.html">
 
-                    <select name="attendance" required>
-                        <option value="" disabled selected>Will you be attending?</option>
-                        <option value="Joyfully Accepts">Joyfully Accepts</option>
-                        <option value="Regretfully Declines">Regretfully Declines</option>
-                    </select>
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email Address" required>
 
-                    <select name="guests" required>
-                        <option value="" disabled selected>Number of Guests</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
+                <select name="attendance" required>
+                    <option value="" disabled selected>Will you be attending?</option>
+                    <option value="Joyfully Accepts">Joyfully Accepts</option>
+                    <option value="Regretfully Declines">Regretfully Declines</option>
+                </select>
 
-                    <textarea name="dietary" rows="3" placeholder="Any dietary restrictions or song requests?"></textarea>
+                <select name="guests" required>
+                    <option value="" disabled selected>Number of Guests</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
 
-                    <button type="submit">Send RSVP</button>
-                </form>
-            </div>
+                <textarea name="dietary" rows="3" placeholder="Any dietary restrictions or song requests?"></textarea>
+
+                <button type="submit">Send RSVP</button>
+            </form>
         </div>
     </div>
 
+    <!-- COUNTDOWN TIMER JAVASCRIPT -->
     <script>
-        // Countdown timer
         const weddingDate = new Date('December 25, 2026 16:00:00').getTime();
+
         const timer = setInterval(function() {
             const now = new Date().getTime();
             const distance = weddingDate - now;
+
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
@@ -337,42 +382,6 @@
                 document.getElementById('countdown').innerHTML = '<h2 style="color: var(--primary); font-family: \'Playfair Display\', serif; margin-top: 30px;">We are married! 🎉</h2>';
             }
         }, 1000);
-
-        // Dynamic scroll-based background
-        const bgPattern = document.querySelector('.bg-pattern');
-        const sections = document.querySelectorAll('.section');
-
-        function updateOnScroll() {
-            const scrollY = window.scrollY;
-            const windowHeight = window.innerHeight;
-
-            // Parallax effect: stars move slower than scroll
-            bgPattern.style.transform = `translateY(${scrollY * 0.3}px)`;
-
-            // Find which section is most in view and apply its theme
-            let activeTheme = 'theme-warm';
-            sections.forEach(section => {
-                const rect = section.getBoundingClientRect();
-                const sectionTop = rect.top;
-                const sectionHeight = rect.height;
-
-                if (sectionTop < windowHeight * 0.5 && sectionTop + sectionHeight > windowHeight * 0.3) {
-                    activeTheme = section.dataset.theme;
-                }
-            });
-
-            // Remove all theme classes and apply the active one
-            document.body.classList.remove('theme-warm', 'theme-sage', 'theme-blue', 'theme-gold');
-            document.body.classList.add(activeTheme);
-
-            // Fade the star pattern as user scrolls deeper
-            const maxScroll = document.body.scrollHeight - windowHeight;
-            const opacity = 0.12 + (scrollY / maxScroll) * 0.08; // 0.12 to 0.20
-            bgPattern.style.opacity = Math.min(opacity, 0.20);
-        }
-
-        window.addEventListener('scroll', updateOnScroll, { passive: true });
-        updateOnScroll(); // Initial call
     </script>
 
 </body>
