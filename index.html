@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ahmed & Ons | We're Getting Married!</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💍</text></svg>">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #5c4a3a; /* deep warm brown, clear on the patterned background */
@@ -13,6 +13,9 @@
             --text: #2b2622;
             --tunisia: #2c6fbb; /* Tunisian blue (Sidi Bou Said) */
             --egypt: #c9a227;   /* Egyptian gold */
+            /* Gradient for buttons. Warm brown-to-gold, matching the page's palette. White text stays readable across the whole gradient. */
+            --btn-gradient: linear-gradient(120deg, var(--primary), var(--egypt));
+            --btn-gradient-hover: linear-gradient(120deg, #463726, #a3811e);
         }
         body {
             font-family: 'Lato', sans-serif;
@@ -65,6 +68,7 @@
             margin-bottom: 10px;
         }
         .date {
+            font-family: 'Playfair Display', serif;
             font-size: 1.5rem;
             letter-spacing: 3px;
             text-transform: uppercase;
@@ -83,12 +87,12 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            background: white;
+            background: linear-gradient(160deg, rgba(44,111,187,0.10), rgba(201,162,39,0.10));
             padding: 15px 20px;
             border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 12px rgba(92,74,58,0.06);
             min-width: 70px;
-            border: 1px solid rgba(138, 121, 104, 0.2);
+            border: 1px solid rgba(44,111,187,0.2);
         }
         .time-box .number {
             font-family: 'Playfair Display', serif;
@@ -107,9 +111,28 @@
         /* ------------------------------- */
 
         .details {
-            line-height: 1.8;
             margin-bottom: 25px;
-            font-size: 1.1rem;
+        }
+        .venue {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--primary);
+            margin: 0 0 4px;
+        }
+        .venue-time {
+            font-size: 1rem;
+            letter-spacing: 1px;
+            color: #6a5f52;
+            margin: 0 0 20px;
+        }
+        .details-message {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.25rem;
+            line-height: 1.6;
+            color: var(--primary);
+            max-width: 420px;
+            margin: 0 auto;
         }
 
         /* --- ACTION LINKS: CALENDAR + MAP --- */
@@ -125,17 +148,18 @@
             align-items: center;
             gap: 8px;
             padding: 12px 22px;
-            border: 1px solid var(--primary);
+            border: none;
             border-radius: 6px;
-            color: var(--primary);
+            background: var(--btn-gradient);
+            color: white;
             text-decoration: none;
             font-size: 0.95rem;
             font-family: 'Lato', sans-serif;
-            transition: background-color 0.2s, color 0.2s;
+            transition: background 0.2s, transform 0.2s;
         }
         .action-link:hover {
-            background-color: var(--primary);
-            color: white;
+            background: var(--btn-gradient-hover);
+            transform: translateY(-2px);
         }
         /* ------------------------------------- */
 
@@ -143,8 +167,9 @@
         .rsvp-section {
             background: white;
             padding: 30px;
+            border: 1.5px solid var(--egypt);
             border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            box-shadow: 0 8px 20px rgba(92,74,58,0.06);
             margin-top: 20px;
         }
         input, select, textarea {
@@ -158,7 +183,7 @@
             font-size: 1rem;
         }
         button {
-            background-color: var(--primary);
+            background: var(--btn-gradient);
             color: white;
             padding: 14px 28px;
             border: none;
@@ -173,7 +198,7 @@
             text-transform: uppercase;
         }
         button:hover {
-            background-color: #463726;
+            background: var(--btn-gradient-hover);
             transform: translateY(-2px);
         }
         @keyframes fadeIn {
@@ -218,8 +243,8 @@
 
     <div class="container">
         <p style="letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem; color: #6a5f52;">Together with their families</p>
-        <p style="font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.3rem; color: var(--primary); margin: 15px 0;">Invite you to celebrate their union</p>
         <h1>Ahmed & Ons</h1>
+        <p style="font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.3rem; color: var(--primary); margin: 15px 0;">Invite you to celebrate their union</p>
         <hr class="union-divider">
         <p class="date">Friday, December 25, 2026</p>
 
@@ -244,8 +269,9 @@
         </div>
 
         <div class="details">
-            <p>🌿 <strong>La Marquise Wedding Hall</strong><br>Ceremony at 4:00 PM</p>
-            <p>We can't wait to celebrate our special day with you!</p>
+            <p class="venue">La Marquise Wedding Hall</p>
+            <p class="venue-time">Ceremony begins at 4:00 PM</p>
+            <p class="details-message">Two families, two homes, one celebration &mdash; and a seat saved for you.</p>
         </div>
 
         <!-- ACTION LINKS: ADD TO CALENDAR + GET DIRECTIONS -->
