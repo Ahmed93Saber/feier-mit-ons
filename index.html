@@ -80,16 +80,19 @@
                 draw 1.2s ease-out 0.7s forwards,
                 join 1.1s cubic-bezier(.5, 0, .2, 1) 2s forwards;
         }
-        .hero-star .heart {
+        /* Egyptian lotus in the center of the star. It opens from its base. */
+        .hero-star .lotus {
             fill: var(--egypt);
+            stroke: var(--egypt);
+            stroke-dasharray: none;
             opacity: 0;
-            transform-origin: 60px 60px;
-            transform: scale(0);
-            animation: pop 0.6s ease-out 3s forwards;
+            transform-origin: 60px 72px;
+            transform: scale(0.2, 0);
+            animation: bloom 0.9s cubic-bezier(.3, 1.4, .5, 1) 3s forwards;
         }
         @keyframes draw { to { stroke-dashoffset: 0; } }
         @keyframes join { to { transform: rotate(45deg); } }
-        @keyframes pop  { to { opacity: 1; transform: scale(1); } }
+        @keyframes bloom { to { opacity: 1; transform: scale(1); } }
 
         /* Text in the hero appears after the star starts to draw. */
         .hero-text {
@@ -196,15 +199,6 @@
             letter-spacing: 1px;
             color: var(--muted);
             margin: 0 0 20px;
-        }
-        .details-message {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-size: 1.25rem;
-            line-height: 1.6;
-            color: var(--primary);
-            max-width: 420px;
-            margin: 0 auto;
         }
 
         /* --- ACTION LINKS --- */
@@ -381,11 +375,11 @@
         /* --- NO MOTION for guests who turn motion off --- */
         @media (prefers-reduced-motion: reduce) {
             .hero-star rect,
-            .hero-star .heart,
+            .hero-star .lotus,
             .hero-text { animation: none !important; }
             .hero-star rect { stroke-dashoffset: 0; }
             .hero-star .sq-gold { transform: rotate(45deg); }
-            .hero-star .heart { opacity: 1; transform: none; }
+            .hero-star .lotus { opacity: 1; transform: none; }
             .hero-text { opacity: 1; }
             .js .reveal { opacity: 1; transform: none; transition: none; }
             button, .action-link { transition: none; }
@@ -421,7 +415,7 @@
             <symbol id="small-star" viewBox="0 0 120 120">
                 <rect x="30" y="30" width="60" height="60" fill="none" stroke="#2c6fbb" stroke-width="5"/>
                 <rect x="30" y="30" width="60" height="60" fill="none" stroke="#c9a227" stroke-width="5" transform="rotate(45 60 60)"/>
-                <circle cx="60" cy="60" r="8" fill="#c9a227"/>
+                <g fill="#c9a227" stroke="#c9a227"><g stroke-width="3" stroke-linejoin="round" fill-opacity="0.28"><path d="M60 66 C53 65 47 60 44 52 C51 54 56 59 60 66 Z"/><path d="M60 66 C67 65 73 60 76 52 C69 54 64 59 60 66 Z"/><path d="M60 66 C55 61 52 53 53 45 C57 51 59 58 60 66 Z"/><path d="M60 66 C65 61 68 53 67 45 C63 51 61 58 60 66 Z"/><path d="M60 40 C64 48 64 59 60 66 C56 59 56 48 60 40 Z"/></g><path d="M53 65 Q60 73 67 65 Q60 69 53 65 Z" stroke-width="3" stroke-linejoin="round"/><path d="M60 70 V77" fill="none" stroke-width="3" stroke-linecap="round"/></g>
             </symbol>
         </defs>
     </svg>
@@ -432,7 +426,7 @@
         <svg class="hero-star" viewBox="0 0 120 120" role="img" aria-label="An eight-point star: a blue square and a gold square join together">
             <rect class="sq-blue" x="30" y="30" width="60" height="60" pathLength="100"/>
             <rect class="sq-gold" x="30" y="30" width="60" height="60" pathLength="100"/>
-            <circle class="heart" cx="60" cy="60" r="6"/>
+            <g class="lotus"><g stroke-width="1.6" stroke-linejoin="round" fill-opacity="0.28"><path d="M60 66 C53 65 47 60 44 52 C51 54 56 59 60 66 Z"/><path d="M60 66 C67 65 73 60 76 52 C69 54 64 59 60 66 Z"/><path d="M60 66 C55 61 52 53 53 45 C57 51 59 58 60 66 Z"/><path d="M60 66 C65 61 68 53 67 45 C63 51 61 58 60 66 Z"/><path d="M60 40 C64 48 64 59 60 66 C56 59 56 48 60 40 Z"/></g><path d="M53 65 Q60 73 67 65 Q60 69 53 65 Z" stroke-width="1.6" stroke-linejoin="round"/><path d="M60 70 V77" fill="none" stroke-width="1.6" stroke-linecap="round"/></g>
         </svg>
 
         <div class="hero-text">
@@ -516,7 +510,7 @@
                 <svg class="hero-star" viewBox="0 0 120 120" aria-hidden="true">
                     <rect class="sq-blue" x="30" y="30" width="60" height="60" pathLength="100"/>
                     <rect class="sq-gold" x="30" y="30" width="60" height="60" pathLength="100"/>
-                    <circle class="heart" cx="60" cy="60" r="6"/>
+                    <g class="lotus"><g stroke-width="1.6" stroke-linejoin="round" fill-opacity="0.28"><path d="M60 66 C53 65 47 60 44 52 C51 54 56 59 60 66 Z"/><path d="M60 66 C67 65 73 60 76 52 C69 54 64 59 60 66 Z"/><path d="M60 66 C55 61 52 53 53 45 C57 51 59 58 60 66 Z"/><path d="M60 66 C65 61 68 53 67 45 C63 51 61 58 60 66 Z"/><path d="M60 40 C64 48 64 59 60 66 C56 59 56 48 60 40 Z"/></g><path d="M53 65 Q60 73 67 65 Q60 69 53 65 Z" stroke-width="1.6" stroke-linejoin="round"/><path d="M60 70 V77" fill="none" stroke-width="1.6" stroke-linecap="round"/></g>
                 </svg>
                 <h3 id="result-title">Thank you!</h3>
                 <p id="result-text"></p>
